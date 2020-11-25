@@ -1,5 +1,6 @@
 package com.cardealership.carrestservice.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -17,13 +18,13 @@ public class Car {
     private String brand;
     @NotNull
     private float cost;
-    @NotNull
+    @NotNull  @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date saleDate;
-    @NotNull
+    @NotNull  @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date depositDate;
     @NotNull
     private boolean sold;
-    @NotNull
+
     private String registration;
     @NotNull
     private float salePrice;
