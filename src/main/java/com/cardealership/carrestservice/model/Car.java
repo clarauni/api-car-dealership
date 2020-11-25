@@ -1,53 +1,43 @@
 package com.cardealership.carrestservice.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-@Table(name = "cars")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-
-public class Car implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
-    @Column (name = "brand")
+    @NotNull
     private String brand;
-
-    @Column (name = "cost")
+    @NotNull
     private float cost;
-
-    @Column (name = "saleDate")
+    @NotNull
     private Date saleDate;
-
-    @Column (name = "depositDate")
+    @NotNull
     private Date depositDate;
-
-    @Column (name = "sold")
+    @NotNull
     private boolean sold;
-
-    @Column (name = "registration")
+    @NotNull
     private String registration;
-
-    @Column (name = "salePrice")
+    @NotNull
     private float salePrice;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "dealership_id" , nullable = false)
-    @JsonIgnore
+    @JoinColumn(name = "dealership_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Dealership dealership;
 
     public Car() {
     }
 
     public Car(String brand, float cost, Date saleDate, Date depositDate, boolean sold, String registration, float salePrice, Dealership dealership) {
+        this.id = id;
         this.brand = brand;
         this.cost = cost;
         this.saleDate = saleDate;
@@ -58,15 +48,11 @@ public class Car implements Serializable {
         this.dealership = dealership;
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

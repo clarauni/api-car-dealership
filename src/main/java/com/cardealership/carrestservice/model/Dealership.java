@@ -1,30 +1,21 @@
 package com.cardealership.carrestservice.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
-import java.io.Serializable;
+import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "dealerships")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-
-public class Dealership implements Serializable {
-    private static final long serialVersionUID = 1L;
-
+public class Dealership {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
-    @Column(name = "address")
+    @NotNull
     private String address;
 
-    @OneToMany(mappedBy = "dealership", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Car> cars;
-
-    public Dealership() {
-    }
+    @OneToMany(mappedBy = "dealership", cascade = CascadeType.ALL)
+    private Set<Car> cars = new HashSet<>();
 
     public Dealership(String address) {
         this.address = address;
@@ -35,15 +26,11 @@ public class Dealership implements Serializable {
         this.cars = cars;
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -61,5 +48,8 @@ public class Dealership implements Serializable {
 
     public void setCars(Set<Car> cars) {
         this.cars = cars;
+        for (Car c: cars) {
+            c.setDealership(this);
+        }
     }
 }
