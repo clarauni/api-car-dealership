@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 public class Car {
@@ -104,5 +105,41 @@ public class Car {
 
     public void setDealership(Dealership dealership) {
         this.dealership = dealership;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Car car = (Car) o;
+        return id == car.id &&
+                Float.compare(car.cost, cost) == 0 &&
+                sold == car.sold &&
+                Float.compare(car.salePrice, salePrice) == 0 &&
+                Objects.equals(brand, car.brand) &&
+                Objects.equals(saleDate, car.saleDate) &&
+                Objects.equals(depositDate, car.depositDate) &&
+                Objects.equals(registration, car.registration) &&
+                Objects.equals(dealership, car.dealership);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, brand, cost, saleDate, depositDate, sold, registration, salePrice, dealership);
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "id=" + id +
+                ", brand='" + brand + '\'' +
+                ", cost=" + cost +
+                ", saleDate=" + saleDate +
+                ", depositDate=" + depositDate +
+                ", sold=" + sold +
+                ", registration='" + registration + '\'' +
+                ", salePrice=" + salePrice +
+                ", dealership=" + dealership +
+                '}';
     }
 }
