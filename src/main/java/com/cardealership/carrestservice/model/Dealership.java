@@ -17,14 +17,6 @@ public class Dealership {
     @OneToMany(mappedBy = "dealership", cascade = CascadeType.ALL)
     private Set<Car> cars = new HashSet<>();
 
-    public Dealership(String address) {
-        this.address = address;
-    }
-
-    public Dealership(String address, Set<Car> cars) {
-        this.address = address;
-        this.cars = cars;
-    }
 
     public int getId() {
         return id;

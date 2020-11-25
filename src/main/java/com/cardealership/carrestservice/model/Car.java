@@ -33,21 +33,6 @@ public class Car {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Dealership dealership;
 
-    public Car() {
-    }
-
-    public Car(String brand, float cost, Date saleDate, Date depositDate, boolean sold, String registration, float salePrice, Dealership dealership) {
-        this.id = id;
-        this.brand = brand;
-        this.cost = cost;
-        this.saleDate = saleDate;
-        this.depositDate = depositDate;
-        this.sold = sold;
-        this.registration = registration;
-        this.salePrice = salePrice;
-        this.dealership = dealership;
-    }
-
     public int getId() {
         return id;
     }
