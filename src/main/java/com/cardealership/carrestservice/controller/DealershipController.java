@@ -2,7 +2,6 @@ package com.cardealership.carrestservice.controller;
 
 
 import com.cardealership.carrestservice.model.Dealership;
-import com.cardealership.carrestservice.repository.CarRepository;
 import com.cardealership.carrestservice.repository.DealershipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,13 +20,11 @@ import java.util.Optional;
 @RequestMapping("/api/dealerships")
 public class DealershipController {
 
-    private   DealershipRepository dealershipRepository;
-    private   CarRepository carRepository;
+    private  final DealershipRepository dealershipRepository;
 
     @Autowired
-    public DealershipController(DealershipRepository dealershipRepository, CarRepository carRepository) {
+    public DealershipController(DealershipRepository dealershipRepository) {
         this.dealershipRepository = dealershipRepository;
-        this.carRepository = carRepository;
     }
 
     //get all dealership
