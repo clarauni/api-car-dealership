@@ -15,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/dealerships")
@@ -29,10 +30,23 @@ public class DealershipController {
         this.carRepository = carRepository;
     }
 
+    //get all dealership
+
     @GetMapping
     public ResponseEntity<Page<Dealership>> getAll (Pageable pageable) {
         return ResponseEntity.ok(dealershipRepository.findAll(pageable));
     }
+
+    //get one dealership by address
+
+    @GetMapping("/{address}/")
+    public ResponseEntity<Dealership> getByAddress (@PathVariable String address) {
+        Optional<Dealership> optionalDealership = dealershipRepository.findByAddress(address);
+        if (!optionalDealership.isPresent())return  ResponseEntity.unprocessableEntity().build();
+        return  ResponseEntity.ok(optionalDealership.get());
+    }
+
+    //add dealership
 
     @PostMapping
     public ResponseEntity<Dealership> create (@Valid @RequestBody Dealership dealership) {
@@ -41,6 +55,7 @@ public class DealershipController {
                 .buildAndExpand(savedDealership.getId()).toUri();
         return  ResponseEntity.created(location).body(savedDealership);
     }
+
 
 
 
