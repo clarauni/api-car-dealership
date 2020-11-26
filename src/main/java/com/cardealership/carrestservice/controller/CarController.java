@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -32,6 +33,18 @@ public class CarController {
     @GetMapping
     public  ResponseEntity<Page<Car>> getAll (Pageable pageable) {
         return ResponseEntity.ok(carRepository.findAll(pageable));
+    }
+
+    public Float getBenefits () {
+        Float benefits = 0.0f;
+        List<Car> cars = carRepository.findAll();
+        for (Car c: cars) benefits += c.getSalePrice() - c.getCost();
+        return benefits;
+    }
+    //get all benefits
+    @GetMapping ("/benefits")
+    public ResponseEntity<Float> showBenefits() {
+        return ResponseEntity.ok(this.getBenefits());
     }
 
     //get all list of cars order by sale date descendant
@@ -111,6 +124,15 @@ public class CarController {
             optionalCar.get().setAvailable(false);
             carRepository.save(optionalCar.get());
         }
+        return ResponseEntity.noContent().build();
+    }
+
+    //delete a car
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Car> delete (@PathVariable int id) {
+        Optional<Car> optionalCar = carRepository.findById(id);
+        if (!optionalCar.isPresent()) return ResponseEntity.unprocessableEntity().build();
+        carRepository.delete(optionalCar.get());
         return ResponseEntity.noContent().build();
     }
 

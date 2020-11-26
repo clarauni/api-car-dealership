@@ -43,6 +43,14 @@ public class DealershipController {
         return  ResponseEntity.ok(optionalDealership.get());
     }
 
+    /*@GetMapping("/benefits")
+    public ResponseEntity float getBenefits () {
+
+    }*/
+
+
+
+
     //add dealership
 
     @PostMapping
