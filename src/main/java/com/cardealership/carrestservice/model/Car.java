@@ -19,12 +19,12 @@ public class Car {
     private String brand;
     @NotNull
     private float cost;
-    @NotNull  @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date saleDate;
     @NotNull  @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date depositDate;
-    @NotNull
-    private boolean sold;
+    //value sold false by default
+    private boolean sold = false;
 
     private String registration;
     @NotNull
@@ -106,5 +106,4 @@ public class Car {
     public void setDealership(Dealership dealership) {
         this.dealership = dealership;
     }
-
 }

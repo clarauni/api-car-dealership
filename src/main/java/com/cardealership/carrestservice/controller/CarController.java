@@ -77,18 +77,26 @@ public class CarController {
     }
 
     //update
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Car> update(@Valid @RequestBody Car car, @PathVariable int id) {
         Optional<Car> optionalCar = carRepository.findById(id);
         if (!optionalCar.isPresent()) return ResponseEntity.unprocessableEntity().build();
 
-        Optional<Dealership> optionalDealership = dealershipRepository.findById(optionalCar.get().getDealership().getId());
-        if (!optionalDealership.isPresent()) return ResponseEntity.unprocessableEntity().build();
+        //car is not sold
+        if (!optionalCar.get().isSold()) {
+            //update registration
+            if (optionalCar.get().getRegistration().isBlank()) {
+                optionalCar.get().setRegistration(car.getRegistration());
+            }
+            //update sale date and final price
+            if (optionalCar.get().getSaleDate() == null && car.getSalePrice() > 0 && car.getSaleDate() != null) {
+                optionalCar.get().setSalePrice(car.getSalePrice());
+                optionalCar.get().setSaleDate(car.getSaleDate());
+                optionalCar.get().setSold(true);
+            }
 
-        car.setDealership(optionalDealership.get());
-        car.setId(optionalDealership.get().getId());
-        carRepository.save(car);
-
+            carRepository.save(optionalCar.get());
+        }
         return ResponseEntity.noContent().build();
     }
 
