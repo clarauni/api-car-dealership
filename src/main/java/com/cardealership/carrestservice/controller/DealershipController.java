@@ -1,6 +1,5 @@
 package com.cardealership.carrestservice.controller;
 
-
 import com.cardealership.carrestservice.model.Dealership;
 import com.cardealership.carrestservice.repository.DealershipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ public class DealershipController {
         this.dealershipRepository = dealershipRepository;
     }
 
-    //get all dealership
+    //get all dealerships
 
     @GetMapping
     public ResponseEntity<Page<Dealership>> getAll (Pageable pageable) {
@@ -43,17 +42,8 @@ public class DealershipController {
         return  ResponseEntity.ok(optionalDealership.get());
     }
 
-    /*@GetMapping("/benefits")
-    public ResponseEntity float getBenefits () {
-
-    }*/
-
-
-
-
-    //add dealership
-
-    @PostMapping
+   // create a dealership
+    @PostMapping ("/create")
     public ResponseEntity<Dealership> create (@Valid @RequestBody Dealership dealership) {
         Dealership savedDealership = dealershipRepository.save(dealership);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -61,7 +51,13 @@ public class DealershipController {
         return  ResponseEntity.created(location).body(savedDealership);
     }
 
-
-
+    //delete a dealership by id
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Dealership> delete (@PathVariable int id) {
+        Optional<Dealership> optionalDealership = dealershipRepository.findById(id);
+        if (!optionalDealership.isPresent())return  ResponseEntity.unprocessableEntity().build();
+        dealershipRepository.delete(optionalDealership.get());
+        return ResponseEntity.noContent().build();
+    }
 
 }
