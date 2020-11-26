@@ -47,8 +47,16 @@ public class CarController {
         return ResponseEntity.ok(carRepository.findAll(pageable).stream().sorted(Comparator.comparing(Car::getDepositDate).reversed()));
     }
 
+    //get car by id
+    @GetMapping("/id/{id}")
+    public ResponseEntity<Car> getById(@PathVariable int id) {
+        Optional<Car> optionalCar = carRepository.findById(id);
+        if(!optionalCar.isPresent()) return ResponseEntity.unprocessableEntity().build();
+        return ResponseEntity.ok(optionalCar.get());
+    }
+
     //get car by brand
-    @GetMapping("/{brand}")
+    @GetMapping("/brand/{brand}")
     public ResponseEntity<Car> getByBrand (@PathVariable String brand) {
         Optional<Car> optionalCar = carRepository.findByBrand(brand);
         if (!optionalCar.isPresent()) return ResponseEntity.unprocessableEntity().build();
