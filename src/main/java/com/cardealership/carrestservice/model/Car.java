@@ -28,7 +28,7 @@ public class Car {
     //value sold false by default
     private boolean sold = false;
 
-    //value sold false by default
+    //value available false by default
     private boolean available = true;
 
     private String registration;

@@ -36,12 +36,6 @@ public class CarController {
         return ResponseEntity.ok(carRepository.findAll(pageable));
     }
 
-    public Float getBenefits (@PathVariable List<Car> cars) {
-        Float benefits = 0.0f;
-        for (Car c: cars) benefits += c.getSalePrice() - c.getCost();
-        return benefits;
-    }
-
     //get all list of cars order by sale date descendant
     @GetMapping("/orderBySaleDate")
     public ResponseEntity<Stream<Car>> getAllOrderBySaleDate (Pageable pageable) {
