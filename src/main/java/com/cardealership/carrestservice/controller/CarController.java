@@ -42,10 +42,10 @@ public class CarController {
         return ResponseEntity.ok(carRepository.findAll(pageable).stream().sorted(Comparator.comparing(Car::getSaleDate).reversed()));
     }
 
-    //get all list of cars order by deposit date descendant
-    @GetMapping("/orderByDespositDate")
-    public ResponseEntity<Stream<Car>> getAllOrderByDepositDate (Pageable pageable) {
-        return ResponseEntity.ok(carRepository.findAll(pageable).stream().sorted(Comparator.comparing(Car::getDepositDate).reversed()));
+    //get all list of cars order by entry date descendant
+    @GetMapping("/orderByEntryDate")
+    public ResponseEntity<Stream<Car>> getAllOrderByEntryDate (Pageable pageable) {
+        return ResponseEntity.ok(carRepository.findAll(pageable).stream().sorted(Comparator.comparing(Car::getEntryDate).reversed()));
     }
 
     //get car by id

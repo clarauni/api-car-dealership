@@ -23,7 +23,7 @@ public class Car {
     private Date saleDate;
 
     @NotNull  @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date depositDate;
+    private Date entryDate;
 
     //value sold false by default
     private boolean sold = false;
@@ -73,12 +73,12 @@ public class Car {
         this.saleDate = saleDate;
     }
 
-    public Date getDepositDate() {
-        return depositDate;
+    public Date getEntryDate() {
+        return entryDate;
     }
 
-    public void setDepositDate(Date depositDate) {
-        this.depositDate = depositDate;
+    public void setEntryDate(Date entryDate) {
+        this.entryDate = entryDate;
     }
 
     public boolean isSold() {
