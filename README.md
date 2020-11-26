@@ -22,5 +22,6 @@ Required features:
 - To be able to register a new car.
 - To be able to see the benefits of the chain itself and to be able to explain it at dealership level.
 
+![alt text](https://github.com/clarauni/cardealership-rest-service/blob/main/data%20structure.png?raw=true)
 
  
