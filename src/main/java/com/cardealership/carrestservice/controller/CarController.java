@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -89,12 +88,27 @@ public class CarController {
                 optionalCar.get().setRegistration(car.getRegistration());
             }
             //update sale date and final price
-            if (optionalCar.get().getSaleDate() == null && car.getSalePrice() > 0 && car.getSaleDate() != null) {
+            if (optionalCar.get().isAvailable() && optionalCar.get().getSaleDate() == null &&
+                car.getSalePrice() > 0 && car.getSaleDate() != null) {
                 optionalCar.get().setSalePrice(car.getSalePrice());
                 optionalCar.get().setSaleDate(car.getSaleDate());
                 optionalCar.get().setSold(true);
             }
 
+            carRepository.save(optionalCar.get());
+        }
+        return ResponseEntity.noContent().build();
+    }
+
+    //retire a car
+    @PutMapping("/retire/{id}")
+    public ResponseEntity<Car> retire(@PathVariable int id) {
+        Optional<Car> optionalCar = carRepository.findById(id);
+        if (!optionalCar.isPresent()) return ResponseEntity.unprocessableEntity().build();
+        //car is not sold
+        if (!optionalCar.get().isSold()) {
+            //car not available
+            optionalCar.get().setAvailable(false);
             carRepository.save(optionalCar.get());
         }
         return ResponseEntity.noContent().build();

@@ -25,7 +25,8 @@ public class Car {
     private Date depositDate;
     //value sold false by default
     private boolean sold = false;
-
+    //value sold false by default
+    private boolean available = true;
     private String registration;
     @NotNull
     private float salePrice;
@@ -81,6 +82,14 @@ public class Car {
 
     public void setSold(boolean sold) {
         this.sold = sold;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
     public String getRegistration() {
