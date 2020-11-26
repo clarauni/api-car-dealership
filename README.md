@@ -31,6 +31,6 @@ Required features:
 - Database: MySql PHPMyAdmin (https://www.phpmyadmin.net/)
 - Database queries with JPA (https://spring.io/guides/gs/accessing-data-jpa/)
 
-Link for REST API testing: https://documenter.getpostman.com/view/13646949/TVmHDeow
+Link for REST API testing: https://documenter.getpostman.com/view/13646949/TVmHDetJ
 
 ![alt text](https://github.com/clarauni/cardealership-rest-service/blob/main/Postman.PNG)
