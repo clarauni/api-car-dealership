@@ -32,4 +32,5 @@ Required features:
 - Database queries with JPA (https://spring.io/guides/gs/accessing-data-jpa/)
 
 Link for REST API testing: https://documenter.getpostman.com/view/13646949/TVmHDeow
+
 ![alt text](https://github.com/clarauni/cardealership-rest-service/blob/main/Postman.PNG)
