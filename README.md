@@ -1,6 +1,6 @@
 # cardealership-rest-service
 
-This technical test consists of the creation of a REST API for a car dealer chain.
+This technical practice consists of the creation of a REST API for a car dealer chain.
 
 Required features:
 
@@ -25,3 +25,8 @@ Required features:
 ![alt text](https://github.com/clarauni/cardealership-rest-service/blob/main/data%20structure.png?raw=true)
 
  
+ Technology used for the Backend
+- Java 11 (https://openjdk.java.net/projects/jdk/11/) 
+- Spring 2.0 (https://spring.io/blog/2019/10/16/spring-boot-2-2-0)  
+- Database: MySql PHPMyAdmin (https://www.phpmyadmin.net/)
+- Database queries with JPA (https://spring.io/guides/gs/accessing-data-jpa/)
