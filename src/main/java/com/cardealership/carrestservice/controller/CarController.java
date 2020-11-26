@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Stream;
 
 @RestController
@@ -35,16 +36,10 @@ public class CarController {
         return ResponseEntity.ok(carRepository.findAll(pageable));
     }
 
-    public Float getBenefits () {
+    public Float getBenefits (@PathVariable List<Car> cars) {
         Float benefits = 0.0f;
-        List<Car> cars = carRepository.findAll();
         for (Car c: cars) benefits += c.getSalePrice() - c.getCost();
         return benefits;
-    }
-    //get all benefits
-    @GetMapping ("/benefits")
-    public ResponseEntity<Float> showBenefits() {
-        return ResponseEntity.ok(this.getBenefits());
     }
 
     //get all list of cars order by sale date descendant
@@ -75,6 +70,27 @@ public class CarController {
         return ResponseEntity.ok(optionalCar.get());
     }
 
+    //get all benefits
+    @GetMapping ("/benefits")
+    public ResponseEntity<Float> getBenefits() {
+        List<Car> cars = carRepository.findAll();
+        Float benefits = 0.0f;
+        for (Car c: cars) benefits += c.getSalePrice() - c.getCost();
+        return ResponseEntity.ok(benefits);
+    }
+
+    //get benefits by dealership
+    @GetMapping ("/benefits/{address}")
+    public ResponseEntity<Float> getBenefitsByAddress(@PathVariable String address) {
+        Optional<Dealership> optionalDealership = dealershipRepository.findByAddress(address);
+        if (!optionalDealership.isPresent())return ResponseEntity.unprocessableEntity().build();
+
+        Set<Car>  cars = optionalDealership.get().getCars();
+        Float benefits = 0.0f;
+        for (Car c: cars) benefits += c.getSalePrice() - c.getCost();
+        return ResponseEntity.ok(benefits);
+    }
+
     //add car in an existing dealership
     @PutMapping("/create/{address}/")
     public ResponseEntity<Car> create (@PathVariable String address, @Valid @RequestBody Car car) {
@@ -88,7 +104,7 @@ public class CarController {
 
     }
 
-    //update
+    //update car by id
     @PutMapping("/update/{id}")
     public ResponseEntity<Car> update(@Valid @RequestBody Car car, @PathVariable int id) {
         Optional<Car> optionalCar = carRepository.findById(id);
@@ -135,6 +151,5 @@ public class CarController {
         carRepository.delete(optionalCar.get());
         return ResponseEntity.noContent().build();
     }
-
 
 }
