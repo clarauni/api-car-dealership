@@ -2,11 +2,9 @@ package com.cardealership.carrestservice.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.Objects;
 
 @Entity
 public class Car {
@@ -17,17 +15,24 @@ public class Car {
 
     @NotNull
     private String brand;
+
     @NotNull
     private float cost;
+
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date saleDate;
+
     @NotNull  @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date depositDate;
+
     //value sold false by default
     private boolean sold = false;
+
     //value sold false by default
     private boolean available = true;
+
     private String registration;
+
     @NotNull
     private float salePrice;
 
