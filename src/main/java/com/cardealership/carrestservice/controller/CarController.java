@@ -64,7 +64,7 @@ public class CarController {
     }
 
     //add car in an existing dealership
-    @PutMapping("/{address}/")
+    @PutMapping("/create/{address}/")
     public ResponseEntity<Car> create (@PathVariable String address, @Valid @RequestBody Car car) {
        Optional<Dealership> optionalDealership = dealershipRepository.findByAddress(address);
         if (!optionalDealership.isPresent()) {
@@ -75,5 +75,22 @@ public class CarController {
         return ResponseEntity.noContent().build();
 
     }
+
+    //update
+    @PutMapping("/{id}")
+    public ResponseEntity<Car> update(@Valid @RequestBody Car car, @PathVariable int id) {
+        Optional<Car> optionalCar = carRepository.findById(id);
+        if (!optionalCar.isPresent()) return ResponseEntity.unprocessableEntity().build();
+
+        Optional<Dealership> optionalDealership = dealershipRepository.findById(optionalCar.get().getDealership().getId());
+        if (!optionalDealership.isPresent()) return ResponseEntity.unprocessableEntity().build();
+
+        car.setDealership(optionalDealership.get());
+        car.setId(optionalDealership.get().getId());
+        carRepository.save(car);
+
+        return ResponseEntity.noContent().build();
+    }
+
 
 }
