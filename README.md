@@ -11,13 +11,16 @@ Required features:
 - Be able to update:
 
      o Registration, in case car is registered
-     o Sale date, for when it is sold.
-     o The final sale price, for when it is sold.
-     o NOTE: a sold car CANNOT be modified.
+     
+     o Sale date, for when it is sold
+     
+     o The final sale price, for when it is sold
+     
+     o NOTE: a sold car CANNOT be modified
 
-• To be able to cancel a car WITHOUT selling.
-• To be able to register a new car.
-• To be able to see the benefits of the chain itself and to be able to explain it at dealership level.
+- To be able to cancel a car WITHOUT selling.
+- To be able to register a new car.
+- To be able to see the benefits of the chain itself and to be able to explain it at dealership level.
 
 
  
