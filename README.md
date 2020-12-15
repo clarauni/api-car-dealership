@@ -1,6 +1,6 @@
 # cardealership-rest-service
 
-This technical practice consists of a REST API for a car dealer chain.
+This service consists of a REST API for a car dealer chain.
 
 Required features:
 
